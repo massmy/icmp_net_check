@@ -1,5 +1,5 @@
-use std::{net::IpAddr, thread::{self}, time::{Duration, SystemTime}};
-use chrono::{DateTime, Utc};
+use std::{net::IpAddr, thread::{self}, time::{Duration}};
+use chrono::{Local};
 use winping::{Buffer, Pinger};
 use log::{Level, LevelFilter, Metadata, Record, info, warn};
 
@@ -14,8 +14,8 @@ impl log::Log for ConsoleLogger {
 
     fn log(&self, record: &Record) {
         if self.enabled(record.metadata()) {
-            let now: DateTime<Utc>  = SystemTime::now().into();
-            println!("{} {} - {}",now.format("%d/%m/%Y %T"), record.level(), record.args());
+            let local = Local::now();
+            println!("{} {} - {}",local.format("%d/%m/%Y %T"), record.level(), record.args());
         }
     }
 
